@@ -128,8 +128,12 @@ Rational Rational::MultiplyFloat(const float& f) const
 
 std::string Rational::ToString()
 {
-	std::string s = std::to_string(m_Numerator) + "/" + std::to_string(m_Denominator);
-	return s;
+	//std::string s = std::to_string(m_Numerator) + "/" + std::to_string(m_Denominator);
+	if (m_Numerator % m_Denominator == 0)
+	{
+		return std::to_string(m_Numerator / m_Denominator);
+	}
+	return std::to_string(m_Numerator) + "/" + std::to_string(m_Denominator);
 }
 
 std::ostream& operator<<(std::ostream& os, const Rational& q)
@@ -141,6 +145,14 @@ std::ostream& operator<<(std::ostream& os, const Rational& q)
 
 int GCD(int a, int b)
 {
+	if (a == 0 || b == 0)
+	{
+		return 0;
+	}
+
+	a = abs(a);
+	b = abs(b);
+
 	while (a != b)
 	{
 		if (a > b)
